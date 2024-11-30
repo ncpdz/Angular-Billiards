@@ -1,0 +1,11 @@
+<h1 class="text-center text-[36px] font-bold mt-10">Hàng mới về</h1>
+<div class="grid grid-cols-4 gap-8 mx-28 my-10">
+  <app-item-new-cues
+    *ngFor="let product of products"
+    [category] ="product.Category.name"
+    [id]="product.id"
+    [name]="product.name"
+    [price]="product.price"
+    [url]="product.image"
+  ></app-item-new-cues>
+</div>

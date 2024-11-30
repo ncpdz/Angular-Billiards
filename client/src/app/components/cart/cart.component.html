@@ -1,0 +1,137 @@
+<div *ngIf="cartItems.length > 0; else emptyCart" class="font-sans m-10">
+  <div class="grid lg:grid-cols-3">
+    <div class="lg:col-span-2 p-6 bg-white overflow-x-auto">
+      <div class="flex gap-2 border-b pb-4">
+        <h2 class="text-2xl font-bold text-gray-800 flex-1">Giỏ hàng</h2>
+        <h3 class="text-base text-gray-800">{{ cartItems.length }} sản phẩm</h3>
+      </div>
+      <table class="mt-6 w-full border-collapse divide-y">
+        <thead class="whitespace-nowrap text-left">
+          <tr>
+            <th class="text-base text-gray-800 p-4">Thông tin</th>
+            <th class="text-base text-gray-800 p-4">Số lượng</th>
+            <th class="text-base text-gray-800 p-4">Giá tiền</th>
+          </tr>
+        </thead>
+        <tbody class="whitespace-nowrap divide-y">
+          <tr *ngFor="let item of cartItems">
+            <td class="p-4">
+              <div class="flex items-center gap-4 w-max">
+                <div class="h-32 shrink-0">
+                  <img
+                    [src]="item.Product.image"
+                    class="w-full h-full object-contain rounded-lg"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="text-base font-bold text-gray-800 break-words whitespace-normal max-w-[300px]"
+                  >
+                    {{ item.Product.name }}
+                  </p>
+                  <button
+                    (click)="removeFromCart(item.productId)"
+                    type="button"
+                    class="mt-2 font-semibold text-red-400 text-sm"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+            </td>
+            <td class="p-4">
+              <div
+                class="flex divide-x border w-max rounded-lg overflow-hidden"
+              >
+                <button
+                  (click)="decreaseQuantity(item)"
+                  type="button"
+                  class="flex items-center justify-center bg-gray-100 w-10 h-10 font-semibold"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-3 fill-current"
+                    viewBox="0 0 124 124"
+                  >
+                    <path
+                      d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                      data-original="#000000"
+                    ></path>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="bg-transparent w-10 h-10 font-semibold text-gray-800 text-base"
+                >
+                  {{ item.quantity }}
+                </button>
+                <button
+                  (click)="increaseQuantity(item)"
+                  type="button"
+                  class="flex justify-center items-center bg-gray-800 text-white w-10 h-10 font-semibold"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-3 fill-current"
+                    viewBox="0 0 42 42"
+                  >
+                    <path
+                      d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                      data-original="#000000"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+            <td class="p-4">
+              <h4 class="text-base font-bold text-gray-800">
+                {{ item.Product.price | currency : "VND" }}đ
+              </h4>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-gray-50 p-6 lg:sticky lg:top-0 lg:h-screen">
+      <h2 class="text-2xl font-bold text-gray-800 border-b pb-4">Đơn hàng</h2>
+      <ul class="text-gray-800 divide-y mt-6">
+        <li class="flex flex-wrap gap-4 text-base py-3">
+          Tổng
+          <span class="ml-auto font-bold"
+            >{{ totalPrice | currency : "VND" }}đ</span
+          >
+        </li>
+        <li class="flex flex-wrap gap-4 text-base py-3">
+          Phí giao hàng
+          <span class="ml-auto font-bold"
+            >{{ shippingFee | currency : "VND" }}đ</span
+          >
+        </li>
+        <li class="flex flex-wrap gap-4 text-base py-3 font-bold">
+          Tổng cộng
+          <span class="ml-auto"
+            >{{ totalPrice + shippingFee | currency : "VND" }}đ</span
+          >
+        </li>
+      </ul>
+      <a routerLink="/checkout">
+        <button
+          type="button"
+          class="mt-6 text-base px-5 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+        >
+          Thanh toán
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="container mx-auto p-6 text-center">
+    <h2 class="text-2xl font-bold mb-6">Giỏ hàng của bạn đang trống</h2>
+    <p>Hãy thêm sản phẩm vào giỏ hàng để tiếp tục mua sắm.</p>
+    <a routerLink="/store" class="text-blue-500 hover:underline">
+      Tiếp tục mua sắm
+    </a>
+  </div>
+</ng-template>

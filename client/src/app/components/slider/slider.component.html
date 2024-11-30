@@ -1,0 +1,56 @@
+<div class="carousel-container">
+  <button (click)="goPrev()" class="nav-btn prev-btn">
+    <svg
+      width="16"
+      height="24"
+      viewBox="0 0 8 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 1L1 7L7 13"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+  <div id="carousel" class="carousel">
+    <div class="carousel-item">
+      <img
+        src="https://bizweb.dktcdn.net/100/357/267/themes/939590/assets/slider_3.jpg?1726037936304"
+        alt="Image 1"
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://bizweb.dktcdn.net/100/357/267/themes/939590/assets/slider_1.jpg?1726037936304"
+        alt="Image 2"
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://bizweb.dktcdn.net/100/357/267/themes/939590/assets/slider_2.jpg?1726037936304"
+        alt="Image 3"
+      />
+    </div>
+  </div>
+  <button (click)="goNext()" class="nav-btn next-btn">
+    <svg
+      width="16"
+      height="24"
+      viewBox="0 0 8 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1L7 7L1 13"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+</div>

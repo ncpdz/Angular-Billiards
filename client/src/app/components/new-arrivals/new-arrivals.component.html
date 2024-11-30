@@ -1,0 +1,18 @@
+<section class="py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2
+      class="font-manrope font-bold text-4xl text-black mb-8 max-xl:text-center"
+    >
+      New Arrivals
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+      <app-product-item
+        *ngFor="let item of products"
+        [id]="item.id"
+        [name]="item.name"
+        [price]="item.price"
+        [url]="item.url"
+      ></app-product-item>
+    </div>
+  </div>
+</section>

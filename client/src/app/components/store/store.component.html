@@ -1,0 +1,22 @@
+<div class="container flex flex-col justify-center items-center py-8 px-10 w-full">
+  <div class="flex my-10 flex-col justify-center items-center">
+    <h1 class="text-[24px] font-bold">Tìm kiếm sản phẩm:</h1>
+    <input 
+      type="text"
+      placeholder="Tên sản phẩm"
+      [(ngModel)]="searchQuery"
+      (input)="searchProducts()"
+      class="flex-grow p-2 border border-black rounded-md w-[500px]"
+    />
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full pl-[100px]">
+    <app-item-new-cues 
+      *ngFor="let product of filteredProducts"
+      [category]="product.Category.name"
+      [id]="product.id"
+      [url]="product.image"
+      [name]="product.name"
+      [price]="product.price"
+    ></app-item-new-cues>
+  </div>
+</div>

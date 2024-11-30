@@ -1,0 +1,8 @@
+.products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  input, select {
+    margin: 10px;
+  }
+  

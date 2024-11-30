@@ -1,0 +1,20 @@
+<a [routerLink]="['/products', id]">
+  <div class="flex flex-col flex-shrink-0 relative gap-2 overflow-hidden">
+    <img
+      [src]="url"
+      alt="sitting area"
+      class="object-cover object-center rounded-md w-[200px] h-[200px] transition-transform transform hover:scale-110 duration-1000 ease-in-out cursor-pointer"
+    />
+    <div class="bg-opacity-30">
+      <div class="flex flex-col h-full pb-6 gap-2">
+        <h3
+          class="text-[14px] font-semibold font-normal line-clamp-2 overflow-hidden text-ellipsis max-w-[200px] min-h-[40px]"
+        >
+          {{ name }}
+        </h3>
+        <p class="m-0 p-0 italic text-gray-500">{{ category }}</p>
+        <span class="text-[#c40025] font-semibold text-[18px]">{{ price }}đ</span>
+      </div>
+    </div>
+  </div>
+</a>

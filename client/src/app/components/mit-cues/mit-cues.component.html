@@ -1,0 +1,85 @@
+<div class="flex flex-col my-14 bg-slate-200 mx-[120px] p-4 rounded">
+  <div class="flex flex-row items-center gap-3">
+    <div class="bg-slate-700 h-full p-[8px] rounded border border-pink-700">
+      <img
+        src="https://bizweb.dktcdn.net/100/357/267/themes/939590/assets/icon_men_product.png?1726037936304"
+        alt=""
+        width="28px"
+        height="28px"
+      />
+    </div>
+    <div>
+      <h3 class="text-[14px]">Sản phẩm</h3>
+      <h1 class="font-semibold text-[18px]">Predator Cues</h1>
+    </div>
+  </div>
+  <div class="flex my-3 h-[330px] items-center">
+    <div class="flex items-start justify-center w-[78%] h-full px-4">
+      <div class="w-full relative flex items-center justify-center">
+        <button
+          aria-label="slide backward"
+          class="bg-slate-500 py-1 px-2 rounded absolute z-30 top-[96%] left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+          (click)="goPrev()"
+        >
+          <svg
+            width="16"
+            height="24"
+            viewBox="0 0 8 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 1L1 7L7 13"
+              stroke="pink"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+          <div
+            id="slider"
+            class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
+          >
+            <app-item-new-cues
+              *ngFor="let product of products"
+              [id]="product.id"
+              [name]="product.name"
+              [price]="product.price"
+              [url]="product.image"
+            ></app-item-new-cues>
+          </div>
+          <button
+            aria-label="slide forward"
+            class="bg-slate-500 py-1 px-2 rounded absolute z-30 right-0 top-[96%] mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+            (click)="goNext()"
+          >
+            <svg
+              width="16"
+              height="24"
+              viewBox="0 0 8 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1L7 7L1 13"
+                stroke="pink"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="w-[22%] h-full overflow-hidden">
+      <img
+        src="https://bizweb.dktcdn.net/100/357/267/themes/939590/assets/women_product_img.jpg?1726037936304"
+        class="w-[270px] h-[330px] transition-transform transform hover:scale-110 duration-1000 ease-in-out cursor-pointer"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
