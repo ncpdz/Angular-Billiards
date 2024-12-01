@@ -21,6 +21,7 @@ import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
 import { canActivateLogin } from './canActive';
 import { UsershttpComponent } from './admin/usershttp/usershttp.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminGuard } from './admin/admin.guard';
 
 export const routes: Routes = [
   {
@@ -43,7 +44,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    pathMatch: 'prefix',
+    canActivate: [AdminGuard],
     children: [
       { path: '', component: DashboardComponent},
       { path: 'admin-products', component: AdminProductsComponent },

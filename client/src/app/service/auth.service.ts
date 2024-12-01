@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3200/api/users'; 
+  private apiUrl = 'http://localhost:3200/api/users';
   private helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
@@ -16,11 +16,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  register(
-    username: string,
-    email: string,
-    password: string,
-  ): Observable<any> {
+  register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, {
       username,
       email,
@@ -30,7 +26,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (typeof localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       return localStorage.getItem('accessToken');
     }
     return null;
@@ -50,8 +46,17 @@ export class AuthService {
     return null;
   }
 
+  isAdmin(): boolean {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.helper.decodeToken(token);
+      return decodedToken.role === 'admin';
+    }
+    return false;
+  }
+
   logout(): void {
-    if (typeof localStorage !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.removeItem('accessToken');
     }
   }
