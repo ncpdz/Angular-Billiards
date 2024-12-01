@@ -19,7 +19,7 @@ class ApiUserController {
         return res.status(401).json({ error: "Invalid credentials" });
       }
       const token = jwt.sign(
-        { id: user.id, username: user.username },
+        { id: user.id, username: user.username, role: user.role },
         "your_secret_key",
         { expiresIn: "1h" }
       );

@@ -1,20 +1,17 @@
-const jwt = require("jsonwebtoken");
+// middleware/authMiddleware.js
+const jwt = require('jsonwebtoken');
 
-const authMiddleware = (req, res, next) => {
-  const token = req.headers['authorization'];
-  
-  if (!token) {
-    return res.status(403).json("A token is required for authentication");
-  }
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401);
 
-  try {
-    const decoded = jwt.verify(token, "TuanDevAccessToken");
-    req.user = decoded;
-  } catch (err) {
-    return res.status(401).json("Invalid Token");
-  }
+  jwt.verify(token, 'your_secret_key', (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.userId = user.id;
+    console.log('Decoded userId:', req.userId); // Add this line
+    next();
+  });
+};
 
-  return next();
-}
-
-module.exports = authMiddleware;
+module.exports = authenticateToken;
