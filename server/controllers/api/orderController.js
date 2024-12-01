@@ -74,10 +74,10 @@
 
 // module.exports = ApiOrderController;
 // controllers/apiOrderController.js
-const { Order, Cart } = require('../../models');
+const { Order, Cart, User } = require("../../models");
 const handleError = (res, error) => {
   console.error(error);
-  res.status(500).json({ error: 'Internal Server Error' });
+  res.status(500).json({ error: "Internal Server Error" });
 };
 
 class ApiOrderController {
@@ -101,18 +101,20 @@ class ApiOrderController {
 
   static async index(req, res) {
     try {
-      const orders = await Order.findAll();
+      const orders = await Order.findAll({
+        include: [{ model: User, attributes: ["username"] }],
+      });
       res.status(200).json(orders);
     } catch (error) {
-      handleError(res, error);
+      console.error("Error fetching orders:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
   }
-
   static async show(req, res) {
     try {
       const order = await Order.findByPk(req.params.id);
       if (!order) {
-        return res.status(404).json({ error: 'Order not found' });
+        return res.status(404).json({ error: "Order not found" });
       }
       res.status(200).json(order);
     } catch (error) {
@@ -125,7 +127,7 @@ class ApiOrderController {
       const { items, totalAmount, customerInfo, status } = req.body;
       const order = await Order.findByPk(req.params.id);
       if (!order) {
-        return res.status(404).json({ error: 'Order not found' });
+        return res.status(404).json({ error: "Order not found" });
       }
       await order.update({ items, totalAmount, customerInfo, status });
       res.status(200).json(order);
@@ -138,10 +140,10 @@ class ApiOrderController {
     try {
       const order = await Order.findByPk(req.params.id);
       if (!order) {
-        return res.status(404).json({ error: 'Order not found' });
+        return res.status(404).json({ error: "Order not found" });
       }
       await order.destroy();
-      res.status(200).json({ message: 'Order deleted successfully' });
+      res.status(200).json({ message: "Order deleted successfully" });
     } catch (error) {
       handleError(res, error);
     }
@@ -149,4 +151,3 @@ class ApiOrderController {
 }
 
 module.exports = ApiOrderController;
-
