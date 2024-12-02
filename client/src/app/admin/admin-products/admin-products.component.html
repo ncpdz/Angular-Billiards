@@ -151,7 +151,7 @@
         </td>
         <td class="p-4 text-sm">{{ product.description }}</td>
         <td class="p-4 text-sm text-blue-500 font-medium">
-          {{ product.price }} VND
+          {{ product.price | currency:'VND':'symbol' }}
         </td>
         <td class="p-4 text-sm">{{ product.stock }}</td>
         <td class="p-4 text-sm">{{ product.Category.name }}</td>

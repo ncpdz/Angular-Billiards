@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../service/users.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent {
       emailControl: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
+        Validators.email,
       ]),
       passwordControl: new FormControl(null, [
         Validators.required,
@@ -44,7 +46,9 @@ export class LoginComponent {
         if (data.token) {
           localStorage.setItem('accessToken', data.token);
           this.router.navigateByUrl('/').then(() => {
-            window.location.reload();
+            // window.location.reload();
+            console.log(this.formLoginGroup.value);
+            
           });
         } else {
           console.error('Token is undefined');
@@ -53,7 +57,8 @@ export class LoginComponent {
       },
       (error) => {
         console.error('Login failed', error);
-        alert('Login failed: ' + error.message);
+        // alert('Login failed: ' + error.message);
+        alert("Tài khoản mật khẩu không hợp lệ");
       }
     );
   }

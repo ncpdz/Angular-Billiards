@@ -15,21 +15,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class AdminOrderComponent {
   isDivVisible = false;
-  toggleDiv() {
-    this.isDivVisible = !this.isDivVisible;
-  }
   orders: any[] = [];
+  selectedOrder: any = null; // Lưu trữ thông tin đơn hàng được chọn
   statuses = [
     { value: 1, label: 'Đang xử lý' },
     { value: 2, label: 'Đã hủy' },
     { value: 3, label: 'Đang giao hàng' },
     { value: 4, label: 'Đã nhận hàng' },
   ];
+
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
     const token = this.authService.getToken();
     if (!token) {
@@ -45,6 +45,7 @@ export class AdminOrderComponent {
       }
     );
   }
+
   updateStatus(orderId: number, status: number): void {
     const token = this.authService.getToken();
     if (!token) {
@@ -61,6 +62,7 @@ export class AdminOrderComponent {
       }
     );
   }
+
   getStatusOptions(currentStatus: number) {
     return this.statuses.filter((status) => {
       if (currentStatus === 2) {
@@ -68,5 +70,13 @@ export class AdminOrderComponent {
       }
       return status.value >= currentStatus;
     });
+  }
+
+  viewDetails(order: any): void {
+    this.selectedOrder = order; // Lưu thông tin đơn hàng được chọn
+  }
+
+  closeModal(): void {
+    this.selectedOrder = null; // Đóng modal
   }
 }

@@ -72,6 +72,7 @@ export class CheckoutComponent {
       this.orderService.createOrder(order, token).subscribe(
         (response) => {
           console.log('Order created', response);
+          alert("Bạn đã đặt hàng thành công!");
           this.router.navigate(['/']);
         },
         (error) => {
